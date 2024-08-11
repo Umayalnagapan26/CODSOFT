@@ -1,0 +1,308 @@
+TASK 3:ATM INTERFACE
+  
+1.Create a class to represent the ATM machine.
+
+2. Design the user interface for the ATM, including options such as withdrawing, depositing, and
+checking the balance.
+
+3. Implement methods for each option, such as withdraw(amount), deposit(amount), and
+checkBalance().
+
+4. Create a class to represent the user's bank account, which stores the account balance.
+
+5. Connect the ATM class with the user's bank account class to access and modify the account
+balance.
+
+6. Validate user input to ensure it is within acceptable limits (e.g., sufficient balance for withdrawals).
+
+7. Display appropriate messages to the user based on their chosen options and the success or failure
+of their transactions.
+
+
+PROGRAM:
+BankAccount.java:
+
+public class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+            System.out.println("Current Balance: $" + balance);
+        } else {
+            System.out.println("Invalid amount. Deposit amount must be positive.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0) {
+            if (balance >= amount) {
+                balance -= amount;
+                System.out.println("Withdrawn: $" + amount);
+                System.out.println("Current Balance: $" + balance);
+            } else {
+                System.out.println("Insufficient funds. Withdrawal amount exceeds balance.");
+            }
+        } else {
+            System.out.println("Invalid amount. Withdrawal amount must be positive.");
+        }
+    }
+}
+
+ATM.java
+import java.util.Scanner;
+
+public class ATM {
+    private BankAccount bankAccount;
+    private Scanner scanner;
+
+    public ATM(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void run() {
+        System.out.println("Welcome to the ATM");
+        while (true) {
+            System.out.println("\nPlease select an option:");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to deposit: $");
+                    double depositAmount = scanner.nextDouble();
+                    bankAccount.deposit(depositAmount);
+                    break;
+                case 2:
+                    System.out.print("Enter amount to withdraw: $");
+                    double withdrawAmount = scanner.nextDouble();
+                    bankAccount.withdraw(withdrawAmount);
+                    break;
+                case 3:
+                    System.out.println("Current Balance: $" + bankAccount.getBalance());
+                    break;
+                case 4:
+                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(1000); // Initial balance of $1000
+        ATM atm = new ATM(account);
+        atm.run();
+    }
+}
+
+OUTPUT:
+D:\uma>javac BankAccount.java ATM.java
+
+D:\uma>java ATM
+Welcome to the ATM
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 1
+Enter amount to deposit: $5600
+Deposited: $5600.0
+Current Balance: $6600.0
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 2
+Enter amount to withdraw: $600
+Withdrawn: $600.0
+Current Balance: $6000.0
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 3
+Current Balance: $6000.0
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 4
+Thank you for using the ATM. Goodbye!TASK 3:ATM INTERFACE
+1.Create a class to represent the ATM machine.
+
+2. Design the user interface for the ATM, including options such as withdrawing, depositing, and
+checking the balance.
+
+3. Implement methods for each option, such as withdraw(amount), deposit(amount), and
+checkBalance().
+
+4. Create a class to represent the user's bank account, which stores the account balance.
+
+5. Connect the ATM class with the user's bank account class to access and modify the account
+balance.
+
+6. Validate user input to ensure it is within acceptable limits (e.g., sufficient balance for withdrawals).
+
+7. Display appropriate messages to the user based on their chosen options and the success or failure
+of their transactions.
+
+
+PROGRAM:
+BankAccount.java:
+
+public class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+            System.out.println("Current Balance: $" + balance);
+        } else {
+            System.out.println("Invalid amount. Deposit amount must be positive.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0) {
+            if (balance >= amount) {
+                balance -= amount;
+                System.out.println("Withdrawn: $" + amount);
+                System.out.println("Current Balance: $" + balance);
+            } else {
+                System.out.println("Insufficient funds. Withdrawal amount exceeds balance.");
+            }
+        } else {
+            System.out.println("Invalid amount. Withdrawal amount must be positive.");
+        }
+    }
+}
+
+ATM.java
+import java.util.Scanner;
+
+public class ATM {
+    private BankAccount bankAccount;
+    private Scanner scanner;
+
+    public ATM(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void run() {
+        System.out.println("Welcome to the ATM");
+        while (true) {
+            System.out.println("\nPlease select an option:");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to deposit: $");
+                    double depositAmount = scanner.nextDouble();
+                    bankAccount.deposit(depositAmount);
+                    break;
+                case 2:
+                    System.out.print("Enter amount to withdraw: $");
+                    double withdrawAmount = scanner.nextDouble();
+                    bankAccount.withdraw(withdrawAmount);
+                    break;
+                case 3:
+                    System.out.println("Current Balance: $" + bankAccount.getBalance());
+                    break;
+                case 4:
+                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(1000); // Initial balance of $1000
+        ATM atm = new ATM(account);
+        atm.run();
+    }
+}
+
+OUTPUT:
+D:\uma>javac BankAccount.java ATM.java
+
+D:\uma>java ATM
+Welcome to the ATM
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 1
+Enter amount to deposit: $5600
+Deposited: $5600.0
+Current Balance: $6600.0
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 2
+Enter amount to withdraw: $600
+Withdrawn: $600.0
+Current Balance: $6000.0
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 3
+Current Balance: $6000.0
+
+Please select an option:
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+Enter your choice: 4
+Thank you for using the ATM. Goodbye!
